@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EngenharIA ATP | Laudo Técnico Estrutural</title>
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --card: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.18);
+      --gold: #D4AF37;
+      --text: #ffffff;
+      --muted: #bfbfbf;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 10px 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .title {
+      color: var(--gold);
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 14px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: white;
+    }
+
+    textarea { resize: vertical; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(255,255,255,0.08);
+      color: var(--gold);
+    }
+
+    .btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- CAPA TÉCNICA -->
+  <div class="card">
+    <h1>ENGENHARIA ATP</h1>
+    <p class="title">Relatório de Avaliação Técnica de Projeto Estrutural</p>
+
+    <label>Empreendimento</label>
+    <input placeholder="Nome do empreendimento">
+
+    <label>Cliente / Contratante</label>
+    <input placeholder="Nome do cliente">
+
+    <label>Responsável Técnico</label>
+    <input value="Ademilton Pavan – CREA SC 86959-8">
+
+    <label>Tipo de Estrutura</label>
+    <select>
+      <option>Concreto Armado</option>
+      <option>Concreto Protendido</option>
+      <option>Estrutura Metálica</option>
+    </select>
+
+    <label>Uso da Edificação</label>
+    <select>
+      <option>Residencial</option>
+      <option>Comercial</option>
+      <option>Industrial</option>
+    </select>
+  </div>
+
+  <!-- CONTROLE DE REVISÕES -->
+  <div class="card">
+    <h2 class="title">Controle de Revisões</h2>
+    <table>
+      <tr><th>Revisão</th><th>Data</th><th>Responsável</th><th>Descrição</th></tr>
+      <tr><td>00</td><td id="dataHoje"></td><td>APavan Engenharia</td><td>Emissão inicial</td></tr>
+    </table>
+  </div>
+
+  <!-- BASE NORMATIVA -->
+  <div class="card">
+    <h2 class="title">Base Normativa</h2>
+    <ul style="font-size:13px; line-height:1.6">
+      <li>ABNT NBR 6118 – Projeto de Estruturas de Concreto</li>
+      <li>ABNT NBR 6120 – Ações para o cálculo de estruturas</li>
+      <li>ABNT NBR 6122 – Projeto e execução de fundações</li>
+      <li>ABNT NBR 15575 – Desempenho de edificações</li>
+      <li>ABNT NBR 15200 – Estruturas de concreto em situação de incêndio</li>
+    </ul>
+  </div>
+
+  <!-- DESCRIÇÃO DO PROJETO -->
+  <div class="card">
+    <h2 class="title">Descrição do Projeto Estrutural</h2>
+    <textarea rows="4" placeholder="Descrição geral da solução estrutural adotada..."></textarea>
+  </div>
+
+  <!-- TABELA ATP -->
+  <div class="card">
+    <h2 class="title">Quadro de Avaliação Técnica do Projeto (ATP)</h2>
+
+    <table id="tabelaATP">
+      <tr>
+        <th>Item</th>
+        <th>Elemento / Prancha</th>
+        <th>Comentário Técnico (ATP)</th>
+        <th>Status</th>
+      </tr>
+    </table>
+
+    <button class="btn secondary" onclick="adicionarLinha()">Adicionar Item</button>
+  </div>
+
+  <!-- DECLARAÇÃO TÉCNICA -->
+  <div class="card">
+    <h2 class="title">Declaração Técnica</h2>
+    <p style="font-size:13px; line-height:1.6">
+      A presente Avaliação Técnica de Projeto (ATP) tem por objetivo verificar a conformidade do projeto estrutural com as normas técnicas vigentes, não substituindo o projeto executivo nem a responsabilidade do autor do projeto estrutural.
+    </p>
+  </div>
+
+  <!-- ENCERRAMENTO -->
+  <div class="card">
+    <h2 class="title">Encerramento</h2>
+    <p style="font-size:13px">
+      Tubarão/SC – <span id="dataExtenso"></span>
+    </p>
+
+    <p style="margin-top:30px">
+      <strong>Ademilton Pavan</strong><br>
+      Engenheiro Civil – CREA SC 86959-8<br>
+      APavan Engenharia
+    </p>
+
+    <button class="btn" onclick="window.print()">Gerar PDF / Imprimir</button>
+  </div>
+
+  <footer>
+    EngenharIA ATP © 2025 • Sistema Técnico de Avaliação de Projetos Estruturais
+  </footer>
+
+</div>
+
+<script>
+  const hoje = new Date();
+  const dataCurta = hoje.toLocaleDateString('pt-BR');
+  const dataLonga = hoje.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+  document.getElementById('dataHoje').innerText = dataCurta;
+  document.getElementById('dataExtenso').innerText = dataLonga;
+
+  let contador = 1;
+  function adicionarLinha() {
+    const tabela = document.getElementById('tabelaATP');
+    const row = tabela.insertRow();
+    row.innerHTML = `
+      <td>${contador++}</td>
+      <td><input></td>
+      <td><textarea rows="2"></textarea></td>
+      <td>
+        <select>
+          <option>Conforme</option>
+          <option>Pendente</option>
+          <option>Não aplicável</option>
+        </select>
+      </td>`;
+  }
+</script>
+
+</body>
+</html>
